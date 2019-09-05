@@ -13,7 +13,7 @@ def todolist(request):
             form.save()
         messages.success(request,("New Task Added!"))
         return redirect('todolist')
-    else: 
+    else:
         all_tasks = TaskList.objects.all()
         paginator = Paginator(all_tasks, 10)
         page = request.GET.get('pg')
@@ -36,7 +36,7 @@ def edit_task(request, task_id):
 
         messages.success(request,("Task Edited!"))
         return redirect('todolist')
-    else: 
+    else:
         task_obj = TaskList.objects.get(pk=task_id)
         return render(request, 'edit.html', {'task_obj': task_obj})
 
@@ -53,6 +53,12 @@ def pending_task(request, task_id):
     task.save()
 
     return redirect('todolist')
+    
+def index(request):
+    context = {
+        'index_text':"Welcome Index Page.",
+        }
+    return render(request, 'index.html', context)
 
 def contact(request):
     context = {
